@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_package = "net.vbunova.grpc";
+
+//service
+
+service streetLight {
+
+  rpc activateLights(ActivateLightsRequest) returns (ActivateLightsResponse);
+  rpc getLightsRealtimeMap(LightsRealtimeMapRequest) returns (stream LightsRealtimeMapResponse);
+  rpc shareSpeedAndRoute(stream ShareSpeedAndRouteRequest) returns (ShareSpeedAndRouteResponse);
+  rpc sendChatMessage(stream SendChatMessageRequest) returns (stream SendChatMessageResponse);
+
+}
+
+message ActivateLightsRequest {
+  string lat = 1;
+  string lon = 2;
+}
+
+message LightsRealtimeMapRequest {}
+
+message ShareSpeedAndRouteRequest {
+  int32 vehicleId = 1;
+  string lat = 2;
+  string lon = 3;
+}
+
+message SendChatMessageRequest {
+  int32 vehicleId = 1;
+  string message = 2;
+}
+
+message ActivateLightsResponse {
+  bool status = 1;
+}
+
+message LightsRealtimeMapResponse {
+  string lat = 1;
+  string lon = 2;
+}
+
+message ShareSpeedAndRouteResponse {
+  bool status = 1;
+}
+
+message SendChatMessageResponse {
+  string message = 1;
+}

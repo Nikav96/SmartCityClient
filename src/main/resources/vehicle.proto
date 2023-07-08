@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_package = "net.vbunova.grpc";
+
+//service
+
+service vehicle {
+
+  rpc getVehicleInformation(VehicleInformationRequest) returns (VehicleInformationResponse);
+  rpc shareSpeedAndRoute(ShareSpeedAndRouteRequest) returns (stream ShareSpeedAndRouteResponse);
+  rpc getNearbyVehicles(stream NearbyVehiclesRequest) returns (NearbyVehiclesResponse);
+  rpc sendChatMessage(stream SendChatMessageRequest) returns (stream SendChatMessageResponse);
+
+}
+
+message VehicleInformationRequest {}
+
+message ShareSpeedAndRouteRequest {
+  int32 vehicleId = 1;
+  string lat = 2;
+  string lon = 3;
+}
+
+message NearbyVehiclesRequest {
+  string lat = 1;
+  string lon = 2;
+}
+
+message SendChatMessageRequest {
+  int32 vehicleId = 1;
+  string message = 2;
+}
+
+message VehicleInformationResponse {
+  int32 vehicleId = 1;
+  string metadata = 2;
+}
+
+message ShareSpeedAndRouteResponse {
+  bool status = 1;
+}
+
+message NearbyVehiclesResponse {
+  int32 vehicleId = 1;
+}
+
+message SendChatMessageResponse {
+  string message = 1;
+}
